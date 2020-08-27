@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 interface ToDo{
   item:string;
   isCompleted:boolean;
@@ -9,7 +9,7 @@ interface ToDo{
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements DoCheck{
   title = this.someMethod();
   inputPlaceHolder = "What needs to be done??";
   cont = true;
@@ -47,10 +47,11 @@ export class AppComponent {
     console.log(3);
     todo.isCompleted = !todo.isCompleted; 
   }
-  countTotal(){
-    console.log("total")
-    return this.todoList.length
-  }
+  // countTotal(){
+  //   console.log("total")
+  //   // return this.todoList.length
+  //   return (this.todoList.filter(x=> !x.isCompleted)).length
+  // }
   allClear(){
     // First way
     // for(let i=this.todoList.length-1; i>=0 ; i--){
@@ -71,6 +72,13 @@ export class AppComponent {
     this.todoList.forEach(todo=> {
       todo.isCompleted = true;
     });
+  }
+
+  lefttimes = 0;
+  //component lifttime
+  ngDoCheck(){
+    console.log("ngDocheck!")
+    this.lefttimes = this.todoList.filter(x=> !x.isCompleted).length;
   }
 
 }
