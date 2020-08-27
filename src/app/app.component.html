@@ -33,12 +33,7 @@
         <input class="edit" value="Create a TodoMVC template">
       </li> -->
       <li *ngFor="let todo of todoList; let idx=index" [class]="{'completed': todo.isCompleted}">
-        <div class="view">
-          <input class="toggle" type="checkbox" (change)="complete(todo)" [checked]="todo.isCompleted">
-          <label>{{todo.item}}</label>
-          <button class="destroy" (click)="destroy(idx)"></button>
-        </div>
-        <input class="edit" value="Rule the web">
+        <app-todoitem [item]="todo" [idx]="idx" (remove)="destroy($event)"></app-todoitem>
       </li>
     </ul>
   </section>
