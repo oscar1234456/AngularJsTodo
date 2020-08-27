@@ -52,9 +52,15 @@ export class AppComponent {
     return this.todoList.length
   }
   allClear(){
-    this.todoList.forEach(todo=> {
-      todo.isCompleted = false;
-    });
+    // First way
+    // for(let i=this.todoList.length-1; i>=0 ; i--){
+    //   if(this.todoList[i].isCompleted){
+    //     this.todoList.splice(i,1)
+    //   }
+    // }
+
+    //second way
+    this.todoList = this.todoList.filter(x=>!x.isCompleted)
   }
 
   allChecked(){
